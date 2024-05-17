@@ -88,3 +88,6 @@ Feature: Get Top Songs by artists from Shazam API
     Then I receive an error response code
 ```
 
+## Continuous Integration
+
+Every commit in this project is running a git action workflow that builds the maven artifact and run all tests. 
