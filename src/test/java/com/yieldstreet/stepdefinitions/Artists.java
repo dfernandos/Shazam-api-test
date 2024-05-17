@@ -8,7 +8,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.Assertions;
+import org.junit.Assert;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Artists {
     @Then("I receive the response code as 200")
     public void i_receive_the_response_code_as_200() {
         int responseCode = response.statusCode();
-        Assertions.assertEquals(responseCode, 200);
+        Assert.assertEquals(responseCode, 200);
     }
 
 
@@ -40,7 +40,7 @@ public class Artists {
         JsonPath jsonPath = response.jsonPath();
         String typeToBeValidated = jsonPath.getJsonObject("data.type[0]").toString();
 
-        Assertions.assertEquals(typeToBeValidated, type);
+        Assert.assertEquals(typeToBeValidated, type);
     }
 
     @Then("I verify that the artist name is {}")
@@ -51,8 +51,7 @@ public class Artists {
         List<String> artistNames = jsonPath.getList("data.attributes.artistName");
 
         for (String artistNameActual : artistNames) {
-            Assertions.assertEquals(artistName, artistNameActual,
-                    "Artist name mismatch: expected " + artistName + " but got " + artistNameActual);
+            Assert.assertEquals(artistName, artistNameActual);
         }
     }
 
@@ -61,7 +60,7 @@ public class Artists {
         responseBody = response.getBody();
         JsonPath jsonPath = response.jsonPath();
         List<String> songs = jsonPath.getList("data");
-        Assertions.assertEquals(songs.size(), 10);
+        Assert.assertEquals(songs.size(), 10);
     }
 
     @Then("I receive the response code as 404")
@@ -69,7 +68,7 @@ public class Artists {
         System.out.println(response.getBody().prettyPrint());
         JsonPath jsonPath = response.jsonPath();
         String errorStatus = jsonPath.getJsonObject("errors.status[0]").toString();
-        Assertions.assertEquals(errorStatus, "404");
+        Assert.assertEquals(errorStatus, "404");
     }
 
     @When("I pass the url in the request for the artist {}")
@@ -95,6 +94,6 @@ public class Artists {
     @Then("I receive an error response code")
     public void iReceiveAnErrorResponseCode() {
         int responseCode = response.statusCode();
-        Assertions.assertEquals(responseCode, 403);
+        Assert.assertEquals(responseCode, 403);
     }
 }

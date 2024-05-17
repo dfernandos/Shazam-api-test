@@ -1,15 +1,13 @@
 package com.yieldstreet.runner;
 
-import io.cucumber.junit.platform.engine.Constants;
-import org.junit.platform.suite.api.ConfigurationParameter;
-import org.junit.platform.suite.api.IncludeEngines;
-import org.junit.platform.suite.api.SelectClasspathResource;
-import org.junit.platform.suite.api.Suite;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
 
-
-@Suite
-@IncludeEngines("cucumber")
-@SelectClasspathResource("com/yieldstreet/stepdefinitions")
-@ConfigurationParameter(key = Constants.FEATURES_PROPERTY_NAME,value = "com/yieldstreet/features")
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/java/com/yieldstreet/features",
+        glue = "com/yieldstreet/stepdefinitions"
+)
 public class RunCucumberTest {
 }
