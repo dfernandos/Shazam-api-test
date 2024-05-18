@@ -91,3 +91,11 @@ Feature: Get Top Songs by artists from Shazam API
 ## Continuous Integration
 
 Every commit in this project is running a git action workflow that builds the maven artifact and run all tests. 
+
+## Reporting
+
+In order to generate the test report you will need to run the following command:
+
+```bash
+mvn clean verify 
+```
